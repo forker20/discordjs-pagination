@@ -35,7 +35,7 @@ module.exports = pagination = async ({ message, pages, buttonList, timeout = 120
    if (typeof message?.author === "object") {
       // Checks
       if (!message && !message.channel) throw new Error("Channel is inaccessible");
-      if (pages.length < 2) return message.channel.send({embeds: [pages[0]]});
+      if (pages.length < 2) return message.reply({embeds: [pages[0]]});
       // Run
       return MessagePagination(message, pages, buttonList, timeout)
    }

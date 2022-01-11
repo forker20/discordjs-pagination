@@ -17,7 +17,7 @@ module.exports = pagination = async ({interaction, message, pages, buttonList, t
       buttonList = buttonList.slice(1, 5);
    }
    // Interaction
-   if (message === undefined) {
+   if (interaction?.user && !message?.author) {
       // Checks
       if (pages.length < 2) {
          if (interaction.deferred === true) {
@@ -30,7 +30,7 @@ module.exports = pagination = async ({interaction, message, pages, buttonList, t
       return InteractionPagination(interaction, pages, buttonList, timeout)
    } 
    // Message
-   else if (interaction === undefined) {
+   else {
       // Checks
       if (!message && !message.channel) throw new Error("Channel is inaccessible");
       if (pages.length < 2) return message.channel.send({embeds: [pages[0]]});

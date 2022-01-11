@@ -4,9 +4,9 @@ const InteractionPagination = require('@acegoal07/discordjs-pagination/lib/inter
 const MessagePagination = require('@acegoal07/discordjs-pagination/lib/message');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // pagination ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = pagination = async ({interaction, message, pages, buttonList, timeout = 12000}) => {
+module.exports = pagination = async ({ message, pages, buttonList, timeout = 12000}) => {
    // Checks
-   if (message === undefined && interaction === undefined) throw new Error("Please provide either interaction or message for the pagination to use");
+   if (message === undefined) throw new Error("Please provide either interaction or message for the pagination to use");
    if (!pages) throw new Error("Missing pages");
    if (!buttonList) throw new Error("Missing buttons");
    if (timeout < 1000) throw new Error("You have set timeout less then 1000ms which is not allowed");
@@ -17,6 +17,7 @@ module.exports = pagination = async ({interaction, message, pages, buttonList, t
       buttonList = buttonList.slice(1, 5);
    }
    // Interaction
+/*
    if (message === undefined) {
       // Checks
       if (pages.length < 2) {
@@ -29,8 +30,9 @@ module.exports = pagination = async ({interaction, message, pages, buttonList, t
       // Run
       return InteractionPagination(interaction, pages, buttonList, timeout)
    } 
+*/
    // Message
-   else if (interaction === undefined) {
+   if (typeof message?.author === "object") {
       // Checks
       if (!message && !message.channel) throw new Error("Channel is inaccessible");
       if (pages.length < 2) return message.channel.send({embeds: [pages[0]]});

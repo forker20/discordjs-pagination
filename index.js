@@ -4,7 +4,7 @@ const InteractionPagination = require('@acegoal07/discordjs-pagination/lib/inter
 const MessagePagination = require('@acegoal07/discordjs-pagination/lib/message');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // pagination ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = pagination = async ({ message, pages, buttonList, timeout = 12000, m, editable}) => {
+module.exports = pages = async ({ message, pages, buttonList, timeout = 12000, m, editable, menu}) => {
    // Checks
    if (message === undefined) throw new Error("Please provide either interaction or message for the pagination to use");
    if (!pages) throw new Error("Missing pages");
@@ -37,7 +37,7 @@ module.exports = pagination = async ({ message, pages, buttonList, timeout = 120
       if (!message && !message.channel) throw new Error("Channel is inaccessible");
       if (pages.length < 2) return message.reply({embeds: [pages[0]]});
       // Run
-      return MessagePagination(message, pages, buttonList, timeout, m, editable)
+      return MessagePagination(message, pages, buttonList, timeout, m, editable, menu)
    }
    else {throw new Error("The pagination was unable to run")}
 }
